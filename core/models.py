@@ -99,7 +99,7 @@ class Slugged(SiteRelated):
         """
         Allows subclasses to implement their own slug creation logic.
         """
-        return slugify(self.title)
+        return slugify(self.title.encode('utf-8'))
 
     def admin_link(self):
         return "<a href='%s'>%s</a>" % (self.get_absolute_url(),
