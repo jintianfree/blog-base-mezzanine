@@ -28,6 +28,7 @@ from mezzanine.utils.models import base_concrete_model, get_user_model_name
 from mezzanine.utils.sites import current_site_id
 from mezzanine.utils.urls import admin_url, slugify, unique_slug
 
+import time
 
 user_model_name = get_user_model_name()
 
@@ -99,7 +100,8 @@ class Slugged(SiteRelated):
         """
         Allows subclasses to implement their own slug creation logic.
         """
-        return slugify(self.title.encode('utf-8'))
+        #return slugify(self.title.encode('utf-8'))
+        return slugify(time.strftime("%Y%m%d%H%M%S", time.localtime()))
 
     def admin_link(self):
         return "<a href='%s'>%s</a>" % (self.get_absolute_url(),
