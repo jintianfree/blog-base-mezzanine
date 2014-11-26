@@ -1,4 +1,21 @@
 {% extends "blog/blog_post_list.html" %}
+
+    <link href="{{STATIC_URL}}/syntaxhighlighter/sass/shCore.css" type="text/css" rel="stylesheet"/>  
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}/syntaxhighlighter/sass/shCoreFadeToGrey.css"/>  
+
+    <script type="text/javascript" src="/syntaxhighlighter/js/shCore.js"></script>  
+      
+    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushCss.js">     </script>  
+    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushJScript.js"> </script>  
+    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushPhp.js">     </script>  
+    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushSql.js">     </script>  
+    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushVb.js">      </script>  
+    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushPython.js">  </script>  
+
+    <script  type = "text/javascript">  
+         SyntaxHighlighter.all();  
+    </script>  
+
 {% load mezzanine_tags comment_tags keyword_tags rating_tags i18n future disqus_tags %}
 
 {% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
