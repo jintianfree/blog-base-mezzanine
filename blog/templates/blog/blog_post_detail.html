@@ -24,6 +24,7 @@
 
 {% block main %}
 
+
 {% block blog_post_detail_postedby %}
 {% editable blog_post.publish_date %}
 <h6 class="post-meta">
@@ -43,9 +44,11 @@
                 data-disqus-identifier="{% disqus_id_for blog_post %}">{% spaceless %}
                 {% trans "Comments" %}
             {% endspaceless %}</a>)
-        {% else %}(<a href="#comments">{% spaceless %}
-            {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
-            {% endspaceless %}</a>)
+        {% else %}
+            <a href="#comments">{% spaceless %}
+            <span class="ds-thread-count" data-thread-key="{{blog_post.id}}"></span>
+            <!-- {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %} -->
+            {% endspaceless %}</a>
         {% endif %}
     {% endif %}
 </p>
@@ -89,11 +92,13 @@
 </div>
 {% endblock %}
 
+{% comment %}
 {% block blog_post_detail_sharebuttons %}
 {% set_short_url_for blog_post %}
 <a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
 <a class="btn btn-sm share-facebook" target="_blank" href="http://facebook.com/sharer.php?u={{ request.build_absolute_uri }}&amp;t={{ blog_post.title|urlencode }}">{% trans "Share on Facebook" %}</a>
 {% endblock %}
+{% endcomment %}
 
 {% block blog_post_previous_next %}
 <ul class="pager">
@@ -128,27 +133,40 @@
 {% endblock %}
 
 {% block blog_post_detail_comments %}
-{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
+{% if blog_post.allow_comments %}
+<!-- {% comments_for blog_post %} -->
+<span id="comments">
+<div class="ds-thread" data-thread-key="{{blog_post.id}}" data-title="{{blog_post.title}}" data-url="{{request.build_absolute_uri}}"></div>
+</span>
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"jintianfree"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
+{% endif %}
 {% endblock %}
 
-    <link href="{{STATIC_URL}}/syntaxhighlighter/sass/shCore.css" type="text/css" rel="stylesheet"/>  
-    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}/syntaxhighlighter/sass/shCoreFadeToGrey.css"/>  
+<link type="text/css" rel="stylesheet" href="{{STATIC_URL}}syntaxhighlighter_2.1.364/styles/shThemeDefault.css"></link>
+<link type="text/css" rel="stylesheet" href="{{STATIC_URL}}syntaxhighlighter_2.1.364/styles/shCore.css"></link>
 
-    <script type="text/javascript" src="/syntaxhighlighter/js/shCore.js"></script>  
-      
-    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushCss.js">     </script>  
-    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushJScript.js"> </script>  
-    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushPhp.js">     </script>  
-    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushSql.js">     </script>  
-    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushVb.js">      </script>  
-    <script type = "text/javascript"  src = "{{STATIC_URL}}/syntaxhighlighter/js/shBrushPython.js">  </script>  
+<script language="javascript" src="{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/shCore.js"></script>
+<script language="javascript" src="{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/shBrushCSharp.js"></script>
+<script language="javascript" src="{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/shBrushXml.js"></script>
+<script language="javascript" src="{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/shBrushCpp.js"></script>
+<script language="javascript" src="{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/shBrushPython.js"></script>
+<script language="javascript" src="{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/shBrushCpp.js"></script>
 
-    <script  type = "text/javascript">  
-         SyntaxHighlighter.all();  
-    </script>  
-
-<link rel="stylesheet" href="{{STATIC_URL}}/highlight/styles/default.css">
-<script src="{{STATIC_URL}}/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+    SyntaxHighlighter.config.clipboardSwf = '{{STATIC_URL}}syntaxhighlighter_2.1.364/scripts/clipboard.swf';
+    SyntaxHighlighter.all();
+</script>
 
 {% endblock %}

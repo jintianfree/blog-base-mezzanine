@@ -43,6 +43,7 @@
 
 {% block main %}
 
+<!--
 {% if tag or category or year or month or author %}
     {% block blog_post_list_filterinfo %}
     <p>
@@ -70,6 +71,7 @@
     {% endblock %}
     {% endif %}
 {% endif %}
+-->
 
 {% for blog_post in blog_posts.object_list %}
 {% block blog_post_list_post_title %}
@@ -137,7 +139,8 @@
     </a>
     {% else %}
     <a href="{{ blog_post.get_absolute_url }}#comments">
-        {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
+        <!--{% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %} -->
+        <span class="ds-thread-count" data-thread-key="{{blog_post.id}}"></span>
     </a>
     {% endif %}
     {% endif %}
@@ -145,6 +148,19 @@
 </div>
 {% endblock %}
 {% endfor %}
+
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"jintianfree"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+
 
 {% pagination_for blog_posts %}
 
