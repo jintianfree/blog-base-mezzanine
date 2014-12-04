@@ -44,10 +44,6 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
-body {
-  margin: 0;
-}
-
 a {
   background: transparent;
 }
@@ -301,15 +297,23 @@ table {
 html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: none repeat scroll 0% 0% #333;
 }
 
 body {
   letter-spacing:0.5px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #888888;
   background-color: #ffffff;
-  font-family: 'Lato', arial, sans-serif;
+  font-family: 'Lato', Verdana, Arial, sans-serif;
+
+width: 90%;
+margin: 10px auto;
+color: #444;
+background: none repeat scroll 0% 0% #FFF;
+border-radius: 15px;
+padding: 0px
 }
 
 input,
@@ -468,22 +472,22 @@ h6 .small {
 
 h1,
 .h1 {
-  font-size: 36px;
+  font-size: 24px;
 }
 
 h2,
 .h2 {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 h3,
 .h3 {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 h4,
 .h4 {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 h5,
@@ -812,19 +816,22 @@ pre code {
 
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    /* width: 750px; */
+    width:95%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    /* width: 970px; */
+    width:95%;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    /* width: 1170px; */
+    width:95%;
   }
 }
 
@@ -1327,7 +1334,7 @@ pre code {
     width: 66.66666666666666%;
   }
   .col-md-7 {
-    width: 58.333333333333336%;
+    width: 70.333333333333336%;
   }
   .col-md-6 {
     width: 50%;
@@ -1342,7 +1349,7 @@ pre code {
     width: 25%;
   }
   .col-md-2 {
-    width: 16.666666666666664%;
+    width: 1.666666666666664%;
   }
   .col-md-1 {
     width: 8.333333333333332%;
@@ -4324,8 +4331,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
+  margin: 0 auto;
   margin-bottom: 20px;
   border: 1px solid transparent;
+  width:90%;
 }
 
 .navbar:before,

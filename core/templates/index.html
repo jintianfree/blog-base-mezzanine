@@ -15,14 +15,72 @@
     Welcome to your new Mezzanine powered website.
     Here are some quick links to get you started:
 </p>
-<ul>
-    <li><a href="/admin/">Log in to the admin interface</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/content-architecture.html">Creating custom page types</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/frequently-asked-questions.html#templates">Modifying HTML templates</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/frequently-asked-questions.html#why-isn-t-the-homepage-a-page-object-i-can-edit-via-the-admin">Changing this homepage</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/frequently-asked-questions.html">Other frequently asked questions</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/configuration.html#default-settings">Full list of settings</a></li>
-    <li><a href="http://mezzanine.jupo.org/docs/deployment.html">Deploying to a production server</a></li>
+
+<script src="http://libs.useso.com/js/jquery/1.9.0/jquery.min.js"></script>  
+<script src="{{STATIC_URL}}jquery.BlackAndWhite.js"></script>  
+
+<style type="text/css">
+a {
+    color:#0072ca;
+}
+
+img {
+    border:none;
+}
+
+#wrapper {
+    width: 960px;
+    list-style:none;
+    margin:10px auto;
+    padding:0;
+    overflow: hidden;
+    zoom: 1;
+}
+
+#wrapper li {
+    float:left;
+    margin: 15px 30px 15px 0;
+}
+
+#wrapper li.last {
+    float:left;
+    margin: 15px 0 15px;
+}
+
+.bwWrapper {
+    position: relative;
+    display: block;
+}
+
+</style>
+
+<ul id="wrapper">
+    <li>
+        <a class="bwWrapper" href="/blog"><img class="gray" src="{{STATIC_URL}}blog.png"/></a>
+    </li>
+    <li>
+        <a class="bwWrapper" href="http://bookbook.tk" target="_blank"><img class="gray" src="{{STATIC_URL}}book.png"/></a>
+    </li>
+    <li>
+        <a class="bwWrapper" href="http://bookqa.tk" target="_blank"><img class="gray" src="{{STATIC_URL}}qa.png"/></a>
+    </li>
+    <li>
+        <a class="bwWrapper" href="###"><img class="gray" src="{{STATIC_URL}}msg.png"/></a>
+    </li>
 </ul>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<script>
+    $(window).load(function(){  
+        $('.bwWrapper').BlackAndWhite({  
+            hoverEffect:true,  
+            webworkerPath: ''  
+        });  
+    });  
+</script>
+
 {% endblocktrans %}
 {% endblock %}
