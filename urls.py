@@ -52,6 +52,11 @@ if getattr(settings, "DEBUG", False):
         ("^robots.txt$", lambda r: HttpResponse("User-agent: *\nDisallow: /",
                                                 content_type="text/plain")),
     )
+else:
+    urlpatterns += patterns("",
+        ("^robots.txt$", lambda r: HttpResponse("User-agent: *\nAllow: /",
+                                                content_type="text/plain")),
+    )
 
 # Miscellanous Mezzanine patterns.
 urlpatterns += patterns("",
