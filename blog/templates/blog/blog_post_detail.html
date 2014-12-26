@@ -54,6 +54,7 @@
 </p>
 {% endblock %}
 
+
 {% block blog_post_detail_featured_image %}
 {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
 <p><img class="img-responsive" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 600 0 %}"></p>
@@ -64,11 +65,15 @@
 {% include "generic/includes/disqus_counts.html" %}
 {% endif %}
 
+<hr/>
+
 {% block blog_post_detail_content %}
 {% editable blog_post.content %}
 {{ blog_post.content|richtext_filters|safe }}
 {% endeditable %}
 {% endblock %}
+
+<hr/>
 
 {% block blog_post_detail_keywords %}
 {% keywords_for blog_post as tags %}
@@ -84,6 +89,7 @@
 {% endif %}
 {% endblock %}
 
+{% comment %}
 {% block blog_post_detail_rating %}
 <div class="panel panel-default rating">
     <div class="panel-body">
@@ -92,7 +98,6 @@
 </div>
 {% endblock %}
 
-{% comment %}
 {% block blog_post_detail_sharebuttons %}
 {% set_short_url_for blog_post %}
 <a class="btn btn-sm share-twitter" target="_blank" href="http://twitter.com/home?status={{ blog_post.short_url|urlencode }}%20{{ blog_post.title|urlencode }}">{% trans "Share on Twitter" %}</a>
@@ -132,7 +137,32 @@
 {% endif %}
 {% endblock %}
 
+<hr/>
+<!-- start duoshuo share -->
+<div class="ds-share flat" 
+data-thread-key="{{blog_post.id}}" 
+data-title="{{blog_post.title}}" 
+data-images="http://itblogs.ga/static/blog.png" 
+data-content="{{ blog_post.description }}" 
+data-url="{{request.build_absolute_uri}}">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+
+      	
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">&#x5206;&#x4EAB;&#x5230;:</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">&#x5FAE;&#x535A;</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ&#x7A7A;&#x95F4;</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">&#x817E;&#x8BAF;&#x5FAE;&#x535A;</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">&#x5FAE;&#x4FE1;</a></li>
+      	
+      </ul>
+      <div class="ds-share-icons-more"></div>
+    </div>
+</div>
+<!-- end duoshuo share -->
+
 <!-- start bshare -->
+<!--
 <br/>
 <div class="bshare-custom">
 &#x5206;&#x4EAB;&#x5230;:
@@ -147,6 +177,7 @@
 <a class="bshareDiv" onclick="javascript:return false;"></a>
 <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 <br/>
+-->
 <!-- end bshare -->
 
 {% block blog_post_detail_comments %}
@@ -161,7 +192,8 @@
     (function() {
         var ds = document.createElement('script');
         ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        //ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
         ds.charset = 'UTF-8';
         (document.getElementsByTagName('head')[0] 
          || document.getElementsByTagName('body')[0]).appendChild(ds);
